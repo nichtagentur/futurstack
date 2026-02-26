@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/review-cursor.png"
+featured_image_alt: "Article featured image"
 title: "Cursor Review 2026: Features, Pricing, and Verdict"
 description: "Comprehensive Cursor review. We tested features, pricing tiers, pros and cons. Find out if Cursor is worth it in 2026."
 date: "2026-02-26"

@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/comparison-surfer-vs-semrush.png"
+featured_image_alt: "Article featured image"
 title: "Surfer SEO vs Semrush: Which Is Better in 2026?"
 description: "Surfer SEO vs Semrush comparison. We compare features, pricing, pros and cons to help you choose the right tool."
 date: "2026-02-26"

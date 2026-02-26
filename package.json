@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
+    "@google/genai": "^1.43.0",
     "yaml": "^2.8.2"
   }
 }

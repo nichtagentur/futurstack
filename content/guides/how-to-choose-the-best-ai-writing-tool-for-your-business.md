@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/guide-ai-writing-choice.png"
+featured_image_alt: "Article featured image"
 title: "How to Choose the Best AI Writing Tool for Your Business"
 description: "A practical guide: How to Choose the Best AI Writing Tool for Your Business. Step-by-step instructions, tips, and tool recommendations."
 date: "2026-02-26"

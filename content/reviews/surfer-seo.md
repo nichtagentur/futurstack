@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/review-surfer-seo.png"
+featured_image_alt: "Article featured image"
 title: "Surfer SEO Review 2026: Features, Pricing, and Verdict"
 description: "Comprehensive Surfer SEO review. We tested features, pricing tiers, pros and cons. Find out if Surfer SEO is worth it in 2026."
 date: "2026-02-26"

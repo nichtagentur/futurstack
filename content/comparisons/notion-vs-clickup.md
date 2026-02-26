@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/comparison-notion-vs-clickup.png"
+featured_image_alt: "Article featured image"
 title: "Notion vs ClickUp: Which Is Better in 2026?"
 description: "Notion vs ClickUp comparison. We compare features, pricing, pros and cons to help you choose the right tool."
 date: "2026-02-26"

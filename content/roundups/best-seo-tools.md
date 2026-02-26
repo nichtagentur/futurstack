@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/roundup-seo.png"
+featured_image_alt: "Article featured image"
 title: "Best SEO Tools in 2026: Expert Picks"
 description: "Our expert picks for the best seo tools in 2026. Detailed analysis of features, pricing, and use cases."
 date: "2026-02-26"

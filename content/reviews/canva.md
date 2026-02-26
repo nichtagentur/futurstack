@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/review-canva.png"
+featured_image_alt: "Article featured image"
 title: "Canva Review 2026: Features, Pricing, and Verdict"
 description: "Comprehensive Canva review. We tested features, pricing tiers, pros and cons. Find out if Canva is worth it in 2026."
 date: "2026-02-26"

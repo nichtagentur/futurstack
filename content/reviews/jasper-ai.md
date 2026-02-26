@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/review-jasper-ai.png"
+featured_image_alt: "Article featured image"
 title: "Jasper AI Review 2026: Features, Pricing, and Verdict"
 description: "Comprehensive Jasper AI review. We tested features, pricing tiers, pros and cons. Find out if Jasper AI is worth it in 2026."
 date: "2026-02-26"

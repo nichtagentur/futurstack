@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/guide-seo-beginner.png"
+featured_image_alt: "Article featured image"
 title: "Getting Started with AI-Powered SEO: A Beginner's Guide"
 description: "A practical guide: Getting Started with AI-Powered SEO: A Beginner's Guide. Step-by-step instructions, tips, and tool recommendations."
 date: "2026-02-26"

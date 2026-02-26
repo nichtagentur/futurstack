@@ -1,4 +1,6 @@
 ---
+featured_image: "/images/comparison-jasper-vs-copyai.png"
+featured_image_alt: "Article featured image"
 title: "Jasper AI vs Copy.ai: Which Is Better in 2026?"
 description: "Jasper AI vs Copy.ai comparison. We compare features, pricing, pros and cons to help you choose the right tool."
 date: "2026-02-26"
