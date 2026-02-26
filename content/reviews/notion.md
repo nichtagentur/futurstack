@@ -75,7 +75,7 @@ The **Business tier at $18 per user monthly** targets growing organizations with
 
 For most users, we recommend starting with the free tier to learn the system, then upgrading to Plus once you're committed to using Notion as your primary workspace.
 
-{{</* affiliate "notion" */>}}
+{{< affiliate "notion" >}}
 
 ## Pros and Cons
 

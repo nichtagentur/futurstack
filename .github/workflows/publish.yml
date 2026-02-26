@@ -1,22 +1,29 @@
-name: Generate Content & Deploy
+name: Publish Pipeline (2-3 articles/week)
 
 on:
   schedule:
-    - cron: '0 8 * * 1'  # Every Monday 8 AM UTC
+    # Tuesday 8 AM, Thursday 8 AM, Saturday 10 AM UTC
+    - cron: '0 8 * * 2'   # Tuesday
+    - cron: '0 8 * * 4'   # Thursday
+    - cron: '0 10 * * 6'  # Saturday
   workflow_dispatch:
     inputs:
-      content_type:
-        description: 'Content type: review, comparison, roundup, or guide'
-        default: 'review'
+      mode:
+        description: 'Pipeline mode'
+        default: 'auto'
         type: choice
         options:
-          - review
-          - comparison
-          - roundup
-          - guide
-          - batch
+          - auto            # Smart calendar picks next article
+          - manual-review   # Specify tool below
+          - manual-comparison
+          - manual-guide
+          - dry-run         # Generate but don't deploy
       tool_id:
-        description: 'Tool ID from tools.yaml (for review type)'
+        description: 'Tool ID (for manual-review mode)'
+        default: ''
+        type: string
+      topic:
+        description: 'Topic or tool pair (for guide/comparison)'
         default: ''
         type: string
 
@@ -24,8 +31,9 @@ permissions:
   contents: write
 
 jobs:
-  generate-and-deploy:
+  publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -40,48 +48,64 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate content
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          TYPE="${{ github.event.inputs.content_type || 'batch' }}"
-          TOOL="${{ github.event.inputs.tool_id }}"
-          if [ "$TYPE" = "batch" ]; then
-            node scripts/generate-content.js --batch
-          elif [ "$TYPE" = "review" ] && [ -n "$TOOL" ]; then
-            node scripts/generate-content.js --type review --tool "$TOOL"
-          else
-            node scripts/generate-content.js --batch
-          fi
-
-      - name: Generate images
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node scripts/generate-images.js
-        continue-on-error: true
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.123.7'
           extended: true
 
-      - name: Build site
-        run: hugo --minify
+      - name: Run Publishing Pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_API_KEY_1: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          MODE="${{ github.event.inputs.mode || 'auto' }}"
+          TOOL="${{ github.event.inputs.tool_id }}"
+          TOPIC="${{ github.event.inputs.topic }}"
+
+          ARGS=""
+          case "$MODE" in
+            auto)
+              ARGS=""
+              ;;
+            manual-review)
+              ARGS="--force-type review --force-tool $TOOL"
+              ;;
+            manual-comparison)
+              ARGS="--force-type comparison --force-tools $TOPIC"
+              ;;
+            manual-guide)
+              ARGS="--force-type guide --force-topic \"$TOPIC\""
+              ;;
+            dry-run)
+              ARGS="--dry-run"
+              ;;
+          esac
+
+          node scripts/publish-pipeline.js $ARGS
 
       - name: Deploy to Vercel
+        if: ${{ github.event.inputs.mode != 'dry-run' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           npm i -g vercel@latest
           vercel --prod --token "$VERCEL_TOKEN" --yes
+        continue-on-error: true
 
       - name: Commit generated content
+        if: ${{ github.event.inputs.mode != 'dry-run' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/ static/images/ data/
-          git diff --cached --quiet || git commit -m "Auto-generate content $(date +%Y-%m-%d)"
+          git add content/ static/images/ data/ qa-report.json
+          git diff --cached --quiet || git commit -m "Publish: auto-generated content $(date +%Y-%m-%d)"
           git push
+
+      - name: Ping Google Sitemap
+        if: ${{ github.event.inputs.mode != 'dry-run' }}
+        run: node scripts/submit-sitemap.js
+        continue-on-error: true

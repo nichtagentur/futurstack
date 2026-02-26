@@ -1,5 +1,6 @@
 {{ if or .Params.has_affiliates (in .Content "affiliate") }}
 <div class="affiliate-disclosure">
-  <p>{{ .Site.Params.affiliateDisclosure }} <a href="/pages/affiliate/">Learn more</a>.</p>
+  <p><strong>Hinweis:</strong> Dieser Artikel enthaelt Affiliate-Links (Werbelinks). Wenn Sie ueber diese Links ein Produkt kaufen oder abonnieren, erhalten wir eine Provision -- ohne Mehrkosten fuer Sie. <a href="/pages/affiliate/">Mehr erfahren</a>.</p>
+  <p style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.8;"><em>Disclosure: This article contains affiliate links. We may earn a commission at no extra cost to you.</em></p>
 </div>
 {{ end }}

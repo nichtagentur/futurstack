@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "FuturStack - AI & SaaS Tool Reviews"
 description = "Expert reviews, comparisons, and guides for the best AI and SaaS tools. Make smarter software decisions."
 copyright = "FuturStack"
-enableRobotsTXT = true
+enableRobotsTXT = false  # Using static/robots.txt instead
 enableEmoji = false
 
 [params]
@@ -13,6 +13,8 @@ enableEmoji = false
   affiliateDisclosure = "This article contains affiliate links. We may earn a commission at no extra cost to you."
   locale = "en_US"
   ogImage = "/images/futurstack-og.png"
+  # Google Search Console: add your verification code here
+  # googleVerification = "YOUR_VERIFICATION_CODE"
 
 [sitemap]
   changefreq = "weekly"

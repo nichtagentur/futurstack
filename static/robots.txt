@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://futurstack.vercel.app/sitemap.xml
+
+# Disallow admin/draft paths
+Disallow: /tags/
+Disallow: /categories/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /

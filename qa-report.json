@@ -1,0 +1,195 @@
+[
+  {
+    "file": "content/reviews/canva.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO."
+    ],
+    "stats": {
+      "wordCount": 1816,
+      "h2Count": 8,
+      "affiliateCount": 1,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/reviews/cursor.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO."
+    ],
+    "stats": {
+      "wordCount": 1942,
+      "h2Count": 8,
+      "affiliateCount": 1,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/reviews/jasper-ai.md",
+    "status": "FAIL",
+    "issues": [
+      "Too few affiliate cards: 0 (min 1).",
+      "LEGAL: has_affiliates=true but no affiliate shortcode in body."
+    ],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1609,
+      "h2Count": 9,
+      "affiliateCount": 0,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/reviews/notion.md",
+    "status": "FAIL",
+    "issues": [
+      "Too few affiliate cards: 0 (min 1).",
+      "LEGAL: has_affiliates=true but no affiliate shortcode in body."
+    ],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO."
+    ],
+    "stats": {
+      "wordCount": 1688,
+      "h2Count": 8,
+      "affiliateCount": 0,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/reviews/surfer-seo.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO."
+    ],
+    "stats": {
+      "wordCount": 1936,
+      "h2Count": 8,
+      "affiliateCount": 1,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/comparisons/jasper-ai-vs-copy-ai.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO."
+    ],
+    "stats": {
+      "wordCount": 1404,
+      "h2Count": 7,
+      "affiliateCount": 2,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/comparisons/notion-vs-clickup.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1554,
+      "h2Count": 7,
+      "affiliateCount": 2,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/comparisons/surfer-seo-vs-semrush.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1717,
+      "h2Count": 8,
+      "affiliateCount": 2,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/roundups/best-ai-writing-tools.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1615,
+      "h2Count": 6,
+      "affiliateCount": 4,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/roundups/best-seo-tools.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1361,
+      "h2Count": 6,
+      "affiliateCount": 2,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/guides/getting-started-with-ai-powered-seo-a-beginner-s-guide.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 1801,
+      "h2Count": 7,
+      "affiliateCount": 3,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  },
+  {
+    "file": "content/guides/how-to-choose-the-best-ai-writing-tool-for-your-business.md",
+    "status": "PASS",
+    "issues": [],
+    "warnings": [
+      "No internal links. Add links to related articles for SEO.",
+      "SEO: First paragraph very short. Strong intro improves dwell time."
+    ],
+    "stats": {
+      "wordCount": 2325,
+      "h2Count": 7,
+      "affiliateCount": 3,
+      "hasFAQ": true,
+      "internalLinks": 0
+    }
+  }
+]

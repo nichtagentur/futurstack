@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuturStack -- How the AI Blog Machine Works</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #2563eb;
+    --blue-dark: #1e40af;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+    --gray: #64748b;
+    --light: #f8fafc;
+    --dark: #0f172a;
+    --slide-max: 1000px;
+  }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--dark);
+    background: #fff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === SLIDE SYSTEM === */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    position: relative;
+  }
+  .slide-inner {
+    max-width: var(--slide-max);
+    width: 100%;
+  }
+  .slide:nth-child(even) { background: var(--light); }
+
+  /* === NAVIGATION === */
+  .nav-dots {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    z-index: 100;
+  }
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+  }
+  .nav-dot:hover, .nav-dot.active { background: var(--blue); transform: scale(1.3); }
+  .nav-dot[title]::after { content: attr(title); }
+
+  /* === TITLE SLIDE === */
+  .slide-title {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--blue-dark) 100%);
+    color: white;
+    text-align: center;
+  }
+  .slide-title h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+  }
+  .slide-title .subtitle {
+    font-size: 1.3rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+  }
+  .slide-title .meta {
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0.2rem;
+  }
+  .badge-blue { background: rgba(37,99,235,0.2); color: #93c5fd; }
+  .badge-green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .badge-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; }
+
+  /* === TYPOGRAPHY === */
+  h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    color: var(--dark);
+  }
+  h2 .accent { color: var(--blue); }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  p { margin-bottom: 0.75rem; }
+  .lead { font-size: 1.15rem; color: var(--gray); margin-bottom: 1.5rem; }
+
+  /* === FLOW DIAGRAM === */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    position: relative;
+  }
+  .flow-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-step:not(:last-child) .flow-num::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 0.5rem);
+    background: #ddd;
+  }
+  .flow-content { flex: 1; padding-top: 0.4rem; }
+  .flow-content h3 { margin-bottom: 0.25rem; }
+  .flow-content p { font-size: 0.95rem; color: var(--gray); margin: 0; }
+  .flow-tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+  }
+  .tag-ai { background: #ede9fe; color: var(--purple); }
+  .tag-auto { background: #dcfce7; color: #16a34a; }
+  .tag-human { background: #fef3c7; color: #d97706; }
+
+  /* === GRID CARDS === */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .card {
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
+  }
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .card p { font-size: 0.9rem; color: var(--gray); margin: 0; }
+  .card-highlight { border-color: var(--blue); background: #eff6ff; }
+  .card-green { border-color: var(--green); background: #ecfdf5; }
+  .card-orange { border-color: var(--orange); background: #fffbeb; }
+  .card-purple { border-color: var(--purple); background: #f5f3ff; }
+
+  /* === BIG NUMBER === */
+  .big-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  /* === PIPELINE VISUAL === */
+  .pipeline {
+    display: flex;
+    gap: 0;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .pipe-stage {
+    flex: 1;
+    min-width: 140px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    position: relative;
+    background: white;
+    border: 1px solid #e2e8f0;
+  }
+  .pipe-stage:first-child { border-radius: 12px 0 0 12px; }
+  .pipe-stage:last-child { border-radius: 0 12px 12px 0; }
+  .pipe-stage:not(:last-child)::after {
+    content: '>';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--blue);
+    z-index: 1;
+    background: white;
+    width: 16px;
+    text-align: center;
+  }
+  .pipe-icon { font-size: 1.5rem; margin-bottom: 0.3rem; display: block; }
+  .pipe-label { font-weight: 700; font-size: 0.85rem; }
+  .pipe-sub { font-size: 0.75rem; color: var(--gray); }
+  .pipe-highlight { background: #eff6ff; border-color: var(--blue); }
+
+  /* === TABLE === */
+  .clean-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .clean-table th {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 2px solid var(--dark);
+    font-weight: 700;
+  }
+  .clean-table td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .clean-table tr:last-child td { border-bottom: none; }
+
+  /* === DIAGRAM BOX === */
+  .diagram-box {
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .diagram-arrow {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--gray);
+    padding: 0.3rem 0;
+  }
+
+  /* === ARCHITECTURE VISUAL === */
+  .arch-row {
+    display: flex;
+    gap: 1rem;
+    margin: 0.75rem 0;
+    align-items: stretch;
+  }
+  .arch-box {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .arch-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+  }
+  .arch-blue { background: #dbeafe; border: 1px solid #93c5fd; }
+  .arch-green { background: #dcfce7; border: 1px solid #86efac; }
+  .arch-purple { background: #ede9fe; border: 1px solid #c4b5fd; }
+  .arch-orange { background: #fef3c7; border: 1px solid #fcd34d; }
+  .arch-dark { background: var(--dark); color: white; }
+  .arch-box strong { display: block; margin-bottom: 0.15rem; }
+
+  /* === LEGAL CHECKLIST === */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check {
+    color: var(--green);
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  /* === SLIDE COUNTER === */
+  .slide-num {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+
+  /* === SECTION DIVIDERS === */
+  .slide-section {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+  }
+  .slide-section h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .slide-section .lead { color: rgba(255,255,255,0.6); }
+
+  /* === SPLIT LAYOUT === */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .split { grid-template-columns: 1fr; gap: 1.5rem; }
+    .pipeline { flex-direction: column; }
+    .pipe-stage { border-radius: 8px !important; }
+    .pipe-stage:not(:last-child)::after { display: none; }
+    .arch-row { flex-direction: column; }
+    h2 { font-size: 1.6rem; }
+    .slide-title h1 { font-size: 2rem; }
+  }
+
+  /* === SCROLL ANIMATIONS === */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ========== SLIDE 1: TITLE ========== -->
+<section class="slide slide-title" id="slide-1">
+  <div class="slide-inner">
+    <div class="badge badge-blue">Fully Automated</div>
+    <div class="badge badge-green">AI-Powered</div>
+    <div class="badge badge-purple">Revenue-Generating</div>
+    <h1 style="margin-top: 1rem;">FuturStack</h1>
+    <p class="subtitle">How the AI Blog Machine Works</p>
+    <p class="meta">A walkthrough of the automated content-to-revenue pipeline</p>
+  </div>
+  <span class="slide-num">1 / 15</span>
+</section>
+
+<!-- ========== SLIDE 2: THE BIG PICTURE ========== -->
+<section class="slide" id="slide-2">
+  <div class="slide-inner fade-in">
+    <h2>The <span class="accent">Big Picture</span></h2>
+    <p class="lead">FuturStack is a blog that writes itself, publishes itself, and earns money while you sleep. Here's how it fits together:</p>
+
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128218;</span>
+        <div class="pipe-label">Data</div>
+        <div class="pipe-sub">Tool database</div>
+      </div>
+      <div class="pipe-stage pipe-highlight">
+        <span class="pipe-icon">&#129302;</span>
+        <div class="pipe-label">AI Writes</div>
+        <div class="pipe-sub">Claude API</div>
+      </div>
+      <div class="pipe-stage pipe-highlight">
+        <span class="pipe-icon">&#127912;</span>
+        <div class="pipe-label">AI Draws</div>
+        <div class="pipe-sub">Nano Banana</div>
+      </div>
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#9881;</span>
+        <div class="pipe-label">Hugo Builds</div>
+        <div class="pipe-sub">Static site</div>
+      </div>
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128640;</span>
+        <div class="pipe-label">Vercel Ships</div>
+        <div class="pipe-sub">Goes live</div>
+      </div>
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128176;</span>
+        <div class="pipe-label">Earns</div>
+        <div class="pipe-sub">Affiliate $$$</div>
+      </div>
+    </div>
+    <p style="text-align: center; color: var(--gray); font-size: 0.9rem;">This entire pipeline runs automatically every week via GitHub Actions.</p>
+  </div>
+  <span class="slide-num">2 / 15</span>
+</section>
+
+<!-- ========== SLIDE 3: SECTION - CONTENT ========== -->
+<section class="slide slide-section" id="slide-3">
+  <div class="slide-inner">
+    <h2>Part 1: Content</h2>
+    <p class="lead">How articles get written without a human writer</p>
+  </div>
+  <span class="slide-num">3 / 15</span>
+</section>
+
+<!-- ========== SLIDE 4: CONTENT TYPES ========== -->
+<section class="slide" id="slide-4">
+  <div class="slide-inner fade-in">
+    <h2>Four <span class="accent">Content Types</span></h2>
+    <p class="lead">Each type targets a different reader intent and keyword strategy.</p>
+
+    <div class="card-grid">
+      <div class="card card-highlight">
+        <span class="card-icon">&#128269;</span>
+        <h3>Reviews</h3>
+        <p>Deep-dive into one tool. Features, pricing, pros/cons, verdict. Targets: "Jasper AI review 2026"</p>
+        <div class="flow-tag tag-ai">1500-2500 words</div>
+      </div>
+      <div class="card card-purple">
+        <span class="card-icon">&#9878;</span>
+        <h3>Comparisons</h3>
+        <p>Tool A vs Tool B. Side-by-side analysis. Targets: "Jasper vs Copy.ai"</p>
+        <div class="flow-tag tag-ai">1500-2200 words</div>
+      </div>
+      <div class="card card-green">
+        <span class="card-icon">&#127942;</span>
+        <h3>Roundups</h3>
+        <p>"Best of" lists by category. Targets: "best AI writing tools 2026"</p>
+        <div class="flow-tag tag-ai">1800-2500 words</div>
+      </div>
+      <div class="card card-orange">
+        <span class="card-icon">&#128214;</span>
+        <h3>Guides</h3>
+        <p>How-to articles. Step-by-step instructions. Targets: "how to choose AI writing tool"</p>
+        <div class="flow-tag tag-ai">1500-2000 words</div>
+      </div>
+    </div>
+    <p style="color: var(--gray); font-size: 0.9rem;">All four types use <strong>buyer-intent keywords</strong> -- the reader is already looking to buy or subscribe.</p>
+  </div>
+  <span class="slide-num">4 / 15</span>
+</section>
+
+<!-- ========== SLIDE 5: CONTENT GENERATION PROCESS ========== -->
+<section class="slide" id="slide-5">
+  <div class="slide-inner fade-in">
+    <h2>How an <span class="accent">Article Gets Written</span></h2>
+    <p class="lead">The script <code>generate-content.js</code> orchestrates the entire writing process.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <h3>Read the Tool Database</h3>
+          <p>The script loads <code>tools.yaml</code> -- real data about features, pricing tiers, pros, cons, and ratings for each tool.</p>
+          <span class="flow-tag tag-auto">Automated</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <h3>Build a Structured Prompt</h3>
+          <p>A detailed prompt is assembled: article type, tool data, target keyword, brand voice instructions, E-E-A-T signals, word count, and structure requirements.</p>
+          <span class="flow-tag tag-auto">Automated</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content">
+          <h3>Claude Writes the Article</h3>
+          <p>The prompt is sent to <strong>Claude Sonnet</strong> via the Anthropic API. Claude generates a full article with H2/H3 structure, pros/cons, FAQ section, and naturally-placed affiliate shortcodes.</p>
+          <span class="flow-tag tag-ai">AI-Generated</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-content">
+          <h3>Front Matter + Metadata</h3>
+          <p>The script generates SEO metadata: title, description, categories, tags, schema type, rating. This is prepended to the article as YAML front matter.</p>
+          <span class="flow-tag tag-auto">Automated</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-content">
+          <h3>Save as Markdown File</h3>
+          <p>The complete article is written to <code>content/reviews/tool-name.md</code> (or comparisons/, roundups/, guides/). Ready for Hugo to build.</p>
+          <span class="flow-tag tag-auto">Automated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">5 / 15</span>
+</section>
+
+<!-- ========== SLIDE 6: WHAT THE AI PROMPT LOOKS LIKE ========== -->
+<section class="slide" id="slide-6">
+  <div class="slide-inner fade-in">
+    <h2>The <span class="accent">AI Prompt</span> Strategy</h2>
+    <p class="lead">The quality of the output depends entirely on the quality of the prompt. Here's what goes in:</p>
+
+    <div class="split">
+      <div>
+        <h3>What the prompt contains:</h3>
+        <ul class="checklist">
+          <li><span class="check">&#10003;</span> <span><strong>Real tool data</strong> -- features, pricing tiers, pros, cons (from tools.yaml, not hallucinated)</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Target keyword</strong> -- e.g., "Jasper AI review 2026"</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Article structure</strong> -- exact H2/H3 section order</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Brand voice</strong> -- expert but accessible, "we tested" language</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>E-E-A-T signals</strong> -- first-person experience, specific details</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Shortcode placement</strong> -- where to put affiliate cards (2-3 per article, natural spots)</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Honesty rules</strong> -- must mention real limitations</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>What the output looks like:</h3>
+        <div class="card" style="font-size: 0.85rem; font-family: monospace; background: var(--dark); color: #e2e8f0; line-height: 1.5;">
+          <div style="color: #94a3b8;">## What is Jasper AI?</div>
+          <br>
+          <div>Jasper AI is a content creation platform built for marketing teams who need to produce high-quality copy at scale. We've been testing Jasper for the past several months, and...</div>
+          <br>
+          <div style="color: #94a3b8;">## Key Features</div>
+          <br>
+          <div style="color: #94a3b8;">### Brand Voice Customization</div>
+          <div>In our experience, this is where Jasper truly stands apart...</div>
+          <br>
+          <div style="color: #60a5fa;">{{&lt; affiliate "jasper" &gt;}}</div>
+          <br>
+          <div style="color: #60a5fa;">{{&lt; proscons pros="..." cons="..." &gt;}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">6 / 15</span>
+</section>
+
+<!-- ========== SLIDE 7: IMAGE GENERATION ========== -->
+<section class="slide" id="slide-7">
+  <div class="slide-inner fade-in">
+    <h2>Image <span class="accent">Generation</span></h2>
+    <p class="lead">Every article gets a unique AI-generated featured image via Google Gemini's Nano Banana model.</p>
+
+    <div class="split">
+      <div>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-num" style="background: var(--purple);">1</div>
+            <div class="flow-content">
+              <h3>Read Article Metadata</h3>
+              <p>The script reads each article's title and category.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num" style="background: var(--purple);">2</div>
+            <div class="flow-content">
+              <h3>Build Image Prompt</h3>
+              <p>A tailored prompt describes the desired visual: abstract, modern, category-specific colors, no text or logos.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num" style="background: var(--purple);">3</div>
+            <div class="flow-content">
+              <h3>Nano Banana Generates</h3>
+              <p>Google Gemini's image model creates a 16:9 featured image.</p>
+              <span class="flow-tag tag-ai">AI-Generated</span>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num" style="background: var(--purple);">4</div>
+            <div class="flow-content">
+              <h3>Save + Link</h3>
+              <p>Image saved to <code>static/images/</code>, front matter updated automatically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="padding: 0.5rem;">
+          <div style="background: linear-gradient(135deg, #1e40af, #7c3aed, #2563eb); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; opacity: 0.8;">
+            [Each article gets a unique abstract<br>tech illustration as its hero image]
+          </div>
+        </div>
+        <div style="margin-top: 1rem;">
+          <strong>13 images generated:</strong>
+          <ul style="font-size: 0.9rem; color: var(--gray); padding-left: 1.2rem; margin-top: 0.5rem;">
+            <li>1 hero banner for homepage</li>
+            <li>5 review featured images</li>
+            <li>3 comparison graphics</li>
+            <li>2 roundup visuals</li>
+            <li>2 guide illustrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">7 / 15</span>
+</section>
+
+<!-- ========== SLIDE 8: SECTION - AUTOMATION ========== -->
+<section class="slide slide-section" id="slide-8">
+  <div class="slide-inner">
+    <h2>Part 2: Automation</h2>
+    <p class="lead">How it runs without anyone pressing a button</p>
+  </div>
+  <span class="slide-num">8 / 15</span>
+</section>
+
+<!-- ========== SLIDE 9: THE AUTOMATION CYCLE ========== -->
+<section class="slide" id="slide-9">
+  <div class="slide-inner fade-in">
+    <h2>The Weekly <span class="accent">Automation Cycle</span></h2>
+    <p class="lead">Every Monday at 8:00 AM, GitHub Actions runs this pipeline automatically:</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">1</div>
+        <div class="flow-content">
+          <h3>GitHub Actions triggers</h3>
+          <p>Cron schedule fires every Monday 8 AM UTC. Can also be triggered manually with a specific content type.</p>
+          <span class="flow-tag tag-auto">Fully Automatic</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">2</div>
+        <div class="flow-content">
+          <h3>Content generation runs</h3>
+          <p><code>node scripts/generate-content.js --batch</code> generates a fresh batch of articles using the Claude API.</p>
+          <span class="flow-tag tag-ai">AI-Powered</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">3</div>
+        <div class="flow-content">
+          <h3>Images generated</h3>
+          <p><code>node scripts/generate-images-gemini.js</code> creates featured images for all new articles.</p>
+          <span class="flow-tag tag-ai">AI-Powered</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">4</div>
+        <div class="flow-content">
+          <h3>Hugo builds the site</h3>
+          <p><code>hugo --minify</code> compiles all markdown + templates + images into a fast static website.</p>
+          <span class="flow-tag tag-auto">Fully Automatic</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">5</div>
+        <div class="flow-content">
+          <h3>Vercel deploys</h3>
+          <p>The built site is pushed to Vercel's CDN. Live worldwide in seconds. HTTPS, caching, edge delivery included.</p>
+          <span class="flow-tag tag-auto">Fully Automatic</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background: var(--green);">6</div>
+        <div class="flow-content">
+          <h3>Content committed to Git</h3>
+          <p>New articles and images are committed back to the repository. Full version history preserved.</p>
+          <span class="flow-tag tag-auto">Fully Automatic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">9 / 15</span>
+</section>
+
+<!-- ========== SLIDE 10: ARCHITECTURE ========== -->
+<section class="slide" id="slide-10">
+  <div class="slide-inner fade-in">
+    <h2>System <span class="accent">Architecture</span></h2>
+    <p class="lead">How all the pieces connect. Every box is a separate service.</p>
+
+    <div class="arch-label">AI Layer (generates content)</div>
+    <div class="arch-row">
+      <div class="arch-box arch-purple">
+        <strong>Claude API</strong>
+        Writes articles
+      </div>
+      <div class="arch-box arch-purple">
+        <strong>Gemini / Nano Banana</strong>
+        Creates images
+      </div>
+    </div>
+
+    <div class="diagram-arrow">&#8595;</div>
+
+    <div class="arch-label">Data Layer (single source of truth)</div>
+    <div class="arch-row">
+      <div class="arch-box arch-blue">
+        <strong>tools.yaml</strong>
+        Features, pricing, ratings
+      </div>
+      <div class="arch-box arch-blue">
+        <strong>affiliates.yaml</strong>
+        Links, commissions
+      </div>
+      <div class="arch-box arch-blue">
+        <strong>content/*.md</strong>
+        Generated articles
+      </div>
+    </div>
+
+    <div class="diagram-arrow">&#8595;</div>
+
+    <div class="arch-label">Build Layer (compiles everything)</div>
+    <div class="arch-row">
+      <div class="arch-box arch-green">
+        <strong>Hugo</strong>
+        Static site generator: markdown + templates + data = HTML
+      </div>
+    </div>
+
+    <div class="diagram-arrow">&#8595;</div>
+
+    <div class="arch-label">Delivery Layer (serves to readers)</div>
+    <div class="arch-row">
+      <div class="arch-box arch-dark">
+        <strong>Vercel CDN</strong>
+        Global edge network, HTTPS, fast loading
+      </div>
+    </div>
+
+    <div class="diagram-arrow">&#8595;</div>
+
+    <div class="arch-label">Automation Layer (runs everything)</div>
+    <div class="arch-row">
+      <div class="arch-box arch-orange">
+        <strong>GitHub Actions</strong>
+        Weekly: generate + build + deploy. Daily: price checks.
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">10 / 15</span>
+</section>
+
+<!-- ========== SLIDE 11: SECTION - MONEY ========== -->
+<section class="slide slide-section" id="slide-11">
+  <div class="slide-inner">
+    <h2>Part 3: Money</h2>
+    <p class="lead">How the blog generates revenue</p>
+  </div>
+  <span class="slide-num">11 / 15</span>
+</section>
+
+<!-- ========== SLIDE 12: MONETIZATION ========== -->
+<section class="slide" id="slide-12">
+  <div class="slide-inner fade-in">
+    <h2>The <span class="accent">Affiliate Revenue</span> Model</h2>
+    <p class="lead">Reader finds article via Google, clicks affiliate link, signs up for tool, you earn a commission. Every month.</p>
+
+    <div class="pipeline" style="margin: 2rem 0;">
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128270;</span>
+        <div class="pipe-label">Google Search</div>
+        <div class="pipe-sub">"best AI writing tool"</div>
+      </div>
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128196;</span>
+        <div class="pipe-label">Reads Article</div>
+        <div class="pipe-sub">FuturStack review</div>
+      </div>
+      <div class="pipe-stage pipe-highlight">
+        <span class="pipe-icon">&#128073;</span>
+        <div class="pipe-label">Clicks Link</div>
+        <div class="pipe-sub">Affiliate link</div>
+      </div>
+      <div class="pipe-stage">
+        <span class="pipe-icon">&#128179;</span>
+        <div class="pipe-label">Signs Up</div>
+        <div class="pipe-sub">For the tool</div>
+      </div>
+      <div class="pipe-stage" style="background: #dcfce7; border-color: var(--green);">
+        <span class="pipe-icon">&#128176;</span>
+        <div class="pipe-label">You Earn</div>
+        <div class="pipe-sub">20-50% recurring</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 1.5rem;">Commission examples from our tool database:</h3>
+    <table class="clean-table">
+      <thead>
+        <tr><th>Tool</th><th>Commission</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jasper AI</td><td>30%</td><td>Recurring (monthly)</td></tr>
+        <tr><td>Copy.ai</td><td>45%</td><td>First payment</td></tr>
+        <tr><td>Surfer SEO</td><td>25%</td><td>Recurring (monthly)</td></tr>
+        <tr><td>Zapier</td><td>25%</td><td>Recurring (monthly)</td></tr>
+        <tr><td>Semrush</td><td>$200</td><td>Per sale</td></tr>
+        <tr><td>Notion</td><td>50%</td><td>Up to $50/sale</td></tr>
+      </tbody>
+    </table>
+    <p style="color: var(--gray); font-size: 0.9rem;"><strong>Key insight:</strong> "Recurring" means you earn every month the customer keeps paying. One article can generate passive income for years.</p>
+  </div>
+  <span class="slide-num">12 / 15</span>
+</section>
+
+<!-- ========== SLIDE 13: SEO + LEGAL ========== -->
+<section class="slide" id="slide-13">
+  <div class="slide-inner fade-in">
+    <h2><span class="accent">SEO</span> + Legal <span class="accent">Compliance</span></h2>
+    <p class="lead">Two things that make or break an affiliate site: search rankings and legal safety.</p>
+
+    <div class="split">
+      <div>
+        <h3>SEO (getting found on Google)</h3>
+        <ul class="checklist">
+          <li><span class="check">&#10003;</span> <span><strong>Schema.org JSON-LD</strong> on every page -- Reviews get star ratings in Google results</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>E-E-A-T signals</strong> -- Experience, Expertise, Authority, Trust (Google's quality criteria)</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Buyer-intent keywords</strong> -- "best X tool 2026", "X vs Y", "X review"</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Clean URL structure</strong> -- /reviews/jasper-ai/, /comparisons/jasper-vs-copyai/</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Auto-generated sitemap.xml</strong> + RSS feed</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Open Graph + Twitter Cards</strong> for social sharing</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal (staying safe)</h3>
+        <ul class="checklist">
+          <li><span class="check">&#10003;</span> <span><strong>FTC disclosure</strong> on every article with affiliate links: "This article contains affiliate links..."</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>rel="nofollow sponsored"</strong> on all affiliate links (Google requirement)</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>DSGVO privacy policy</strong> with data processing details</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Cookie consent banner</strong> -- no tracking until explicit consent</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>Impressum</strong> -- German legal requirement (&sect; 5 TMG)</span></li>
+          <li><span class="check">&#10003;</span> <span><strong>AI disclosure</strong> in footer: "Content is AI-assisted and expert-reviewed"</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">13 / 15</span>
+</section>
+
+<!-- ========== SLIDE 14: WHAT'S LIVE NOW ========== -->
+<section class="slide" id="slide-14">
+  <div class="slide-inner fade-in">
+    <h2>What's <span class="accent">Live Right Now</span></h2>
+    <p class="lead">The site is deployed and publicly accessible at <strong>futurstack.vercel.app</strong></p>
+
+    <div class="card-grid">
+      <div class="card" style="text-align: center;">
+        <div class="big-num">12</div>
+        <h3>Articles Published</h3>
+        <p>5 reviews, 3 comparisons, 2 roundups, 2 guides</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="big-num">13</div>
+        <h3>AI Images</h3>
+        <p>Unique Nano Banana generated featured images</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="big-num">12</div>
+        <h3>Tools in Database</h3>
+        <p>With full pricing, features, pros/cons data</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div class="big-num">88</div>
+        <h3>HTML Pages</h3>
+        <p>Built by Hugo in under 100ms</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 1.5rem;">What still needs manual setup:</h3>
+    <table class="clean-table">
+      <thead>
+        <tr><th>Item</th><th>Why</th><th>Effort</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Real affiliate URLs</td><td>You need to apply to each program and get approved</td><td>1-2 hours</td></tr>
+        <tr><td>Impressum details</td><td>Legal requirement: real name + address</td><td>5 minutes</td></tr>
+        <tr><td>GitHub Actions secrets</td><td>API keys for automated pipeline</td><td>10 minutes</td></tr>
+        <tr><td>Custom domain (optional)</td><td>e.g., futurstack.com instead of .vercel.app</td><td>15 minutes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <span class="slide-num">14 / 15</span>
+</section>
+
+<!-- ========== SLIDE 15: SUMMARY ========== -->
+<section class="slide slide-title" id="slide-15">
+  <div class="slide-inner">
+    <h1 style="font-size: 2.2rem;">The Machine in One Sentence</h1>
+    <p class="subtitle" style="max-width: 700px; margin: 0 auto 2rem;">
+      AI writes expert-level tool reviews using real data, AI generates the images, Hugo builds the site, GitHub Actions orchestrates everything weekly, Vercel serves it globally, and affiliate links turn reader clicks into recurring revenue.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+      <div class="badge badge-blue" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Zero manual writing</div>
+      <div class="badge badge-green" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Zero manual publishing</div>
+      <div class="badge badge-purple" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Passive recurring income</div>
+    </div>
+
+    <p class="meta" style="font-size: 1rem; opacity: 0.7;">futurstack.vercel.app</p>
+  </div>
+  <span class="slide-num">15 / 15</span>
+</section>
+
+<!-- === SCRIPTS === -->
+<script>
+  // Generate nav dots
+  const slides = document.querySelectorAll('.slide');
+  const navDots = document.getElementById('navDots');
+  const labels = ['Title','Big Picture','Content','Types','Writing','Prompt','Images','Automation','Cycle','Architecture','Money','Revenue','SEO+Legal','Status','Summary'];
+
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.title = labels[i] || '';
+    dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+    navDots.appendChild(dot);
+  });
+
+  // Active dot + fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = Array.from(slides).indexOf(entry.target);
+        document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+        // Fade in
+        entry.target.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+      }
+    });
+  }, { threshold: 0.4 });
+
+  slides.forEach(s => observer.observe(s));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const current = Array.from(slides).findIndex(s => {
+      const rect = s.getBoundingClientRect();
+      return rect.top >= -100 && rect.top < window.innerHeight / 2;
+    });
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      const next = Math.min(current + 1, slides.length - 1);
+      slides[next].scrollIntoView({ behavior: 'smooth' });
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prev = Math.max(current - 1, 0);
+      slides[prev].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+</body>
+</html>
