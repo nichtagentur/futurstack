@@ -1,0 +1,24 @@
+<div id="cookie-consent" class="cookie-banner" style="display:none;">
+  <div class="cookie-content">
+    <p>We use cookies to improve your experience. By continuing, you agree to our <a href="/pages/privacy/">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn btn-primary">Accept</button>
+      <button id="cookie-decline" class="btn btn-secondary">Decline</button>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  if (!localStorage.getItem('cookie-consent')) {
+    document.getElementById('cookie-consent').style.display = 'block';
+  }
+  document.getElementById('cookie-accept')?.addEventListener('click', function() {
+    localStorage.setItem('cookie-consent', 'accepted');
+    document.getElementById('cookie-consent').style.display = 'none';
+  });
+  document.getElementById('cookie-decline')?.addEventListener('click', function() {
+    localStorage.setItem('cookie-consent', 'declined');
+    document.getElementById('cookie-consent').style.display = 'none';
+  });
+})();
+</script>

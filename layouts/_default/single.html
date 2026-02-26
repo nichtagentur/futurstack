@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="article" itemscope itemtype="https://schema.org/Article">
+  {{ if .Params.featured_image }}
+  <img class="article-hero" src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt | default .Title }}" loading="lazy">
+  {{ end }}
+  <header class="article-header">
+    <div class="article-meta">
+      {{ with .Params.categories }}
+      <span class="article-category">{{ index . 0 }}</span>
+      {{ end }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      <span class="reading-time">{{ math.Round (div (countwords .Content) 250.0) }} min read</span>
+    </div>
+    <h1 itemprop="headline">{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p class="article-subtitle">{{ . }}</p>
+    {{ end }}
+  </header>
+  {{ partial "disclosure.html" . }}
+  <div class="article-content" itemprop="articleBody">
+    {{ .Content }}
+  </div>
+  {{ with .Params.tags }}
+  <div class="article-tags">
+    {{ range . }}
+    <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
+</article>
+
+{{ if .Params.schema_type }}
+<script type="application/ld+json">
+{{ partial "schema.html" . }}
+</script>
+{{ end }}
+{{ end }}

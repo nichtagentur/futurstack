@@ -1,0 +1,386 @@
+jasper:
+  name: "Jasper AI"
+  category: "AI Writing"
+  website: "https://www.jasper.ai"
+  founded: 2021
+  rating: 4.5
+  pricing:
+    - tier: "Creator"
+      price: "$49/mo"
+      features: ["1 seat", "Brand voice", "SEO mode", "50+ templates"]
+    - tier: "Pro"
+      price: "$69/mo"
+      features: ["1 seat", "Everything in Creator", "Art generation", "10 knowledge assets"]
+    - tier: "Business"
+      price: "Custom"
+      features: ["Unlimited seats", "API access", "Custom workflows", "Dedicated support"]
+  features:
+    - "50+ content templates"
+    - "Brand voice customization"
+    - "SEO content optimization"
+    - "AI art generation"
+    - "Team collaboration"
+    - "Chrome extension"
+    - "API access (Business)"
+  pros:
+    - "Excellent for marketing teams"
+    - "Strong brand voice consistency"
+    - "Good template variety"
+    - "Active development and updates"
+  cons:
+    - "Expensive for solo users"
+    - "Output quality varies by template"
+    - "Learning curve for advanced features"
+    - "Word limits on lower tiers"
+  best_for: "Marketing teams needing consistent brand content at scale"
+  competitors: ["copy-ai", "writesonic", "grammarly"]
+
+copy-ai:
+  name: "Copy.ai"
+  category: "AI Writing"
+  website: "https://www.copy.ai"
+  founded: 2020
+  rating: 4.3
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["2,000 words/mo", "1 seat", "Basic templates"]
+    - tier: "Starter"
+      price: "$49/mo"
+      features: ["Unlimited words", "1 seat", "All templates", "25+ languages"]
+    - tier: "Advanced"
+      price: "$249/mo"
+      features: ["Unlimited words", "5 seats", "Workflows", "API access"]
+  features:
+    - "90+ copywriting templates"
+    - "Workflow automation"
+    - "25+ languages"
+    - "Brand voice"
+    - "Infobase (knowledge base)"
+    - "API access (Advanced)"
+  pros:
+    - "Generous free tier"
+    - "Great for sales copy"
+    - "Workflow automation is powerful"
+    - "Easy to learn"
+  cons:
+    - "Advanced plan is pricey"
+    - "Less suited for long-form content"
+    - "Template quality inconsistent"
+  best_for: "Sales teams and solo marketers needing quick copy generation"
+  competitors: ["jasper", "writesonic"]
+
+surfer-seo:
+  name: "Surfer SEO"
+  category: "SEO"
+  website: "https://surferseo.com"
+  founded: 2017
+  rating: 4.6
+  pricing:
+    - tier: "Essential"
+      price: "$89/mo"
+      features: ["30 articles/mo", "Content editor", "Keyword research"]
+    - tier: "Scale"
+      price: "$129/mo"
+      features: ["100 articles/mo", "Audit", "SERP analyzer"]
+    - tier: "Enterprise"
+      price: "Custom"
+      features: ["Unlimited", "API", "Custom onboarding"]
+  features:
+    - "AI content editor with real-time scoring"
+    - "Keyword research and clustering"
+    - "SERP analyzer"
+    - "Content audit tool"
+    - "Jasper and Google Docs integrations"
+    - "NLP-powered content optimization"
+  pros:
+    - "Data-driven content optimization"
+    - "Excellent content editor"
+    - "Good integration ecosystem"
+    - "Helps rank consistently"
+  cons:
+    - "Steep learning curve"
+    - "Expensive for beginners"
+    - "Can over-optimize if followed blindly"
+  best_for: "Content teams focused on SEO-driven organic growth"
+  competitors: ["semrush"]
+
+writesonic:
+  name: "Writesonic"
+  category: "AI Writing"
+  website: "https://writesonic.com"
+  founded: 2021
+  rating: 4.2
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["10,000 words", "Basic features"]
+    - tier: "Individual"
+      price: "$19/mo"
+      features: ["Unlimited words", "100+ templates", "Brand voice"]
+    - tier: "Team"
+      price: "$19/user/mo"
+      features: ["Everything Individual", "Team management", "API"]
+  features:
+    - "100+ content templates"
+    - "Chatsonic (AI chat)"
+    - "Photosonic (AI images)"
+    - "Brand voice"
+    - "Factual article writer"
+    - "WordPress integration"
+  pros:
+    - "Very affordable"
+    - "Built-in image generation"
+    - "Good blog post generator"
+    - "Free tier available"
+  cons:
+    - "Quality below Jasper for marketing"
+    - "Interface can be cluttered"
+    - "Customer support inconsistent"
+  best_for: "Budget-conscious content creators and bloggers"
+  competitors: ["jasper", "copy-ai"]
+
+notion:
+  name: "Notion"
+  category: "Productivity"
+  website: "https://www.notion.so"
+  founded: 2016
+  rating: 4.7
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["Individual use", "Basic blocks", "7-day history"]
+    - tier: "Plus"
+      price: "$10/mo"
+      features: ["Unlimited blocks", "Unlimited uploads", "30-day history"]
+    - tier: "Business"
+      price: "$18/mo"
+      features: ["SAML SSO", "Advanced permissions", "90-day history"]
+  features:
+    - "Notion AI writing assistant"
+    - "Docs, wikis, and databases"
+    - "Project management"
+    - "100+ templates"
+    - "API and integrations"
+    - "Real-time collaboration"
+  pros:
+    - "Incredibly flexible"
+    - "Beautiful interface"
+    - "Great for knowledge management"
+    - "Strong free tier"
+  cons:
+    - "Can be slow with large databases"
+    - "Learning curve for power features"
+    - "Mobile app less polished"
+  best_for: "Teams wanting an all-in-one workspace for docs, projects, and wikis"
+  competitors: ["clickup"]
+
+clickup:
+  name: "ClickUp"
+  category: "Project Management"
+  website: "https://clickup.com"
+  founded: 2017
+  rating: 4.4
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["Unlimited tasks", "100MB storage", "Basic features"]
+    - tier: "Unlimited"
+      price: "$7/mo"
+      features: ["Unlimited storage", "Integrations", "Dashboards"]
+    - tier: "Business"
+      price: "$12/mo"
+      features: ["AI features", "Time tracking", "Advanced automation"]
+  features:
+    - "ClickUp AI"
+    - "Tasks, docs, goals, whiteboards"
+    - "Time tracking"
+    - "Custom automations"
+    - "1,000+ integrations"
+    - "Multiple views (list, board, Gantt, calendar)"
+  pros:
+    - "Very affordable"
+    - "Feature-rich"
+    - "Highly customizable"
+    - "Good AI integration"
+  cons:
+    - "Can feel overwhelming"
+    - "Performance issues with large workspaces"
+    - "Frequent UI changes"
+  best_for: "Teams wanting a budget-friendly, feature-rich project management tool"
+  competitors: ["notion"]
+
+canva:
+  name: "Canva"
+  category: "Design"
+  website: "https://www.canva.com"
+  founded: 2013
+  rating: 4.6
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["250,000+ templates", "Basic AI tools", "5GB storage"]
+    - tier: "Pro"
+      price: "$13/mo"
+      features: ["All premium templates", "Magic Resize", "100GB storage"]
+    - tier: "Teams"
+      price: "$10/user/mo"
+      features: ["Brand kit", "Team management", "1TB storage"]
+  features:
+    - "Magic Design (AI-powered)"
+    - "Text to Image"
+    - "Background remover"
+    - "Video editor"
+    - "Presentation builder"
+    - "Print on demand"
+  pros:
+    - "Extremely easy to use"
+    - "Massive template library"
+    - "AI features well integrated"
+    - "Great free tier"
+  cons:
+    - "Limited for complex designs"
+    - "Brand kit only on paid plans"
+    - "Export options limited on free"
+  best_for: "Non-designers and small teams needing quick, professional-looking visuals"
+  competitors: []
+
+grammarly:
+  name: "Grammarly"
+  category: "AI Writing"
+  website: "https://www.grammarly.com"
+  founded: 2009
+  rating: 4.5
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["Basic grammar", "Spelling", "Punctuation"]
+    - tier: "Premium"
+      price: "$12/mo"
+      features: ["Advanced grammar", "Tone", "Clarity", "GrammarlyGO AI"]
+    - tier: "Business"
+      price: "$15/user/mo"
+      features: ["Style guides", "Brand tones", "Analytics", "SAML SSO"]
+  features:
+    - "Grammar and spelling check"
+    - "Tone detection"
+    - "Clarity suggestions"
+    - "GrammarlyGO AI writing"
+    - "Works in 500,000+ apps"
+    - "Plagiarism detection"
+  pros:
+    - "Works everywhere you write"
+    - "Reliable grammar correction"
+    - "Good AI writing suggestions"
+    - "Browser extension is seamless"
+  cons:
+    - "Premium features require paid plan"
+    - "Can be overly prescriptive"
+    - "Not ideal for creative writing"
+  best_for: "Anyone who writes professionally and wants consistent quality"
+  competitors: ["jasper", "copy-ai"]
+
+zapier:
+  name: "Zapier"
+  category: "Automation"
+  website: "https://zapier.com"
+  founded: 2011
+  rating: 4.5
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["100 tasks/mo", "5 Zaps", "Single-step"]
+    - tier: "Starter"
+      price: "$20/mo"
+      features: ["750 tasks/mo", "20 Zaps", "Multi-step"]
+    - tier: "Professional"
+      price: "$49/mo"
+      features: ["2,000 tasks/mo", "Unlimited Zaps", "Webhooks"]
+  features:
+    - "6,000+ app integrations"
+    - "Multi-step workflows"
+    - "AI-powered Zap builder"
+    - "Filters and formatting"
+    - "Webhooks"
+    - "Paths (conditional logic)"
+  pros:
+    - "Massive integration library"
+    - "No-code interface"
+    - "Reliable execution"
+    - "Good documentation"
+  cons:
+    - "Gets expensive at scale"
+    - "Task-based pricing adds up"
+    - "Complex workflows hard to debug"
+  best_for: "Businesses automating repetitive tasks across multiple apps"
+  competitors: []
+
+semrush:
+  name: "Semrush"
+  category: "SEO"
+  website: "https://www.semrush.com"
+  founded: 2008
+  rating: 4.7
+  pricing:
+    - tier: "Pro"
+      price: "$130/mo"
+      features: ["5 projects", "500 keywords", "10,000 results/report"]
+    - tier: "Guru"
+      price: "$250/mo"
+      features: ["15 projects", "1,500 keywords", "Content marketing toolkit"]
+    - tier: "Business"
+      price: "$500/mo"
+      features: ["40 projects", "5,000 keywords", "API access"]
+  features:
+    - "Keyword research"
+    - "Site audit"
+    - "Competitor analysis"
+    - "Content marketing toolkit"
+    - "Social media management"
+    - "PPC analysis"
+  pros:
+    - "Most comprehensive SEO toolkit"
+    - "Excellent competitor analysis"
+    - "Accurate keyword data"
+    - "Regular feature updates"
+  cons:
+    - "Very expensive"
+    - "Overwhelming for beginners"
+    - "Add-ons increase cost further"
+  best_for: "SEO professionals and agencies needing comprehensive competitive intelligence"
+  competitors: ["surfer-seo"]
+
+cursor:
+  name: "Cursor"
+  category: "Developer Tools"
+  website: "https://cursor.sh"
+  founded: 2022
+  rating: 4.6
+  pricing:
+    - tier: "Free"
+      price: "$0"
+      features: ["2,000 completions/mo", "50 slow requests/mo"]
+    - tier: "Pro"
+      price: "$20/mo"
+      features: ["Unlimited completions", "500 fast requests/mo", "10 Claude Opus uses/day"]
+    - tier: "Business"
+      price: "$40/user/mo"
+      features: ["Everything Pro", "Admin dashboard", "SAML SSO"]
+  features:
+    - "AI code completion"
+    - "Chat with codebase"
+    - "Multi-file editing"
+    - "Built on VS Code"
+    - "Multiple AI models"
+    - "Codebase indexing"
+  pros:
+    - "Best AI code editor available"
+    - "Understands full codebase context"
+    - "VS Code compatibility"
+    - "Fast and responsive"
+  cons:
+    - "Limited free tier"
+    - "Requires internet connection"
+    - "Some VS Code extensions incompatible"
+  best_for: "Developers wanting AI-assisted coding with deep codebase understanding"
+  competitors: []

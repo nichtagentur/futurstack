@@ -1,0 +1,39 @@
+{{ $a_id := .Get 0 }}
+{{ $b_id := .Get 1 }}
+{{ $a := index .Site.Data.affiliates $a_id }}
+{{ $b := index .Site.Data.affiliates $b_id }}
+{{ if and $a $b }}
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>{{ $a.name }}</th>
+      <th>{{ $b.name }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rating</td>
+      <td>{{ $a.rating | default "-" }}/5</td>
+      <td>{{ $b.rating | default "-" }}/5</td>
+    </tr>
+    <tr>
+      <td>Starting Price</td>
+      <td>{{ $a.price | default "-" }}</td>
+      <td>{{ $b.price | default "-" }}</td>
+    </tr>
+    <tr>
+      <td>Category</td>
+      <td>{{ $a.category | default "-" }}</td>
+      <td>{{ $b.category | default "-" }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td><a href="{{ $a.url }}" target="_blank" rel="nofollow sponsored noopener" class="btn btn-primary">Try {{ $a.name }}</a></td>
+      <td><a href="{{ $b.url }}" target="_blank" rel="nofollow sponsored noopener" class="btn btn-primary">Try {{ $b.name }}</a></td>
+    </tr>
+  </tfoot>
+</table>
+{{ end }}

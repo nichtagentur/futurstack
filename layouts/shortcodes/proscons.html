@@ -1,0 +1,22 @@
+<div class="proscons">
+  <div class="pros">
+    <h4>Pros</h4>
+    {{ with .Get "pros" }}
+    <ul>
+      {{ range split . ";" }}
+      <li>{{ trim . " " }}</li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+  <div class="cons">
+    <h4>Cons</h4>
+    {{ with .Get "cons" }}
+    <ul>
+      {{ range split . ";" }}
+      <li>{{ trim . " " }}</li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+</div>

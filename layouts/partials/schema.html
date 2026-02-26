@@ -1,0 +1,47 @@
+{{ if eq .Params.schema_type "review" }}
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "name": {{ .Title | jsonify }},
+  "description": {{ .Params.description | jsonify }},
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "author": {
+    "@type": "Organization",
+    "name": "FuturStack"
+  },
+  "itemReviewed": {
+    "@type": "SoftwareApplication",
+    "name": {{ .Params.tool_name | default .Title | jsonify }},
+    "applicationCategory": "{{ .Params.tool_category | default "Business" }}"
+  }{{ with .Params.rating }},
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "{{ . }}",
+    "bestRating": "5"
+  }{{ end }}
+}
+{{ else if eq .Params.schema_type "roundup" }}
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ .Title | jsonify }},
+  "description": {{ .Params.description | jsonify }},
+  "numberOfItems": {{ .Params.list_count | default 5 }}
+}
+{{ else }}
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ .Params.description | jsonify }},
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "author": {
+    "@type": "Organization",
+    "name": "FuturStack"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FuturStack"
+  }
+}
+{{ end }}

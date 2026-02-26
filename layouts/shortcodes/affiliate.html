@@ -1,0 +1,17 @@
+{{ $id := .Get 0 }}
+{{ $tool := index .Site.Data.affiliates $id }}
+{{ with $tool }}
+<div class="affiliate-card">
+  <div class="affiliate-card-header">
+    <h3>{{ .name }}</h3>
+    {{ with .rating }}<span class="rating">{{ . }}/5</span>{{ end }}
+  </div>
+  {{ with .description }}<p class="affiliate-card-desc">{{ . }}</p>{{ end }}
+  <div class="affiliate-card-footer">
+    {{ with .price }}<span class="price">From {{ . }}</span>{{ end }}
+    <a href="{{ .url }}" target="_blank" rel="nofollow sponsored noopener" class="btn btn-primary">
+      Try {{ .name }} <span class="affiliate-label">(affiliate link)</span>
+    </a>
+  </div>
+</div>
+{{ end }}

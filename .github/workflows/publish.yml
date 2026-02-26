@@ -1,0 +1,87 @@
+name: Generate Content & Deploy
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday 8 AM UTC
+  workflow_dispatch:
+    inputs:
+      content_type:
+        description: 'Content type: review, comparison, roundup, or guide'
+        default: 'review'
+        type: choice
+        options:
+          - review
+          - comparison
+          - roundup
+          - guide
+          - batch
+      tool_id:
+        description: 'Tool ID from tools.yaml (for review type)'
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate content
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          TYPE="${{ github.event.inputs.content_type || 'batch' }}"
+          TOOL="${{ github.event.inputs.tool_id }}"
+          if [ "$TYPE" = "batch" ]; then
+            node scripts/generate-content.js --batch
+          elif [ "$TYPE" = "review" ] && [ -n "$TOOL" ]; then
+            node scripts/generate-content.js --type review --tool "$TOOL"
+          else
+            node scripts/generate-content.js --batch
+          fi
+
+      - name: Generate images
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/generate-images.js
+        continue-on-error: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npm i -g vercel@latest
+          vercel --prod --token "$VERCEL_TOKEN" --yes
+
+      - name: Commit generated content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/ static/images/ data/
+          git diff --cached --quiet || git commit -m "Auto-generate content $(date +%Y-%m-%d)"
+          git push

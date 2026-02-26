@@ -1,0 +1,15 @@
+{{ $rating := float (.Get 0) }}
+{{ $full := int (math.Floor $rating) }}
+{{ $half := gt (sub $rating (math.Floor $rating)) 0.0 }}
+<span class="rating-stars">
+  {{ range seq 1 5 }}
+    {{ if le . $full }}
+      <span class="star filled">&#9733;</span>
+    {{ else if and $half (eq . (add $full 1)) }}
+      <span class="star half">&#9733;</span>
+    {{ else }}
+      <span class="star">&#9733;</span>
+    {{ end }}
+  {{ end }}
+  <span class="rating-value">{{ .Get 0 }}</span>
+</span>

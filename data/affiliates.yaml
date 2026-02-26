@@ -1,0 +1,107 @@
+jasper:
+  name: "Jasper AI"
+  url: "https://www.jasper.ai/?via=futurstack"
+  description: "AI writing assistant for marketing teams. Creates blog posts, ads, emails, and social media content."
+  category: "AI Writing"
+  rating: 4.5
+  price: "$49/mo"
+  commission: "30% recurring"
+
+copy-ai:
+  name: "Copy.ai"
+  url: "https://www.copy.ai/?via=futurstack"
+  description: "AI-powered copywriting tool for sales and marketing teams. Workflow automation included."
+  category: "AI Writing"
+  rating: 4.3
+  price: "$49/mo"
+  commission: "45% first payment"
+
+surfer-seo:
+  name: "Surfer SEO"
+  url: "https://surferseo.com/?via=futurstack"
+  description: "AI-driven SEO optimization tool. Content editor, keyword research, and SERP analysis."
+  category: "SEO"
+  rating: 4.6
+  price: "$89/mo"
+  commission: "25% recurring"
+
+writesonic:
+  name: "Writesonic"
+  url: "https://writesonic.com/?via=futurstack"
+  description: "AI content creation platform with blog writer, paraphrasing tool, and AI image generation."
+  category: "AI Writing"
+  rating: 4.2
+  price: "$19/mo"
+  commission: "30% recurring"
+
+notion:
+  name: "Notion"
+  url: "https://www.notion.so/?via=futurstack"
+  description: "All-in-one workspace with AI. Notes, docs, project management, and wikis in one tool."
+  category: "Productivity"
+  rating: 4.7
+  price: "$10/mo"
+  commission: "50% up to $50"
+
+clickup:
+  name: "ClickUp"
+  url: "https://clickup.com/?via=futurstack"
+  description: "Project management platform with AI features. Tasks, docs, goals, and time tracking."
+  category: "Project Management"
+  rating: 4.4
+  price: "$7/mo"
+  commission: "20% recurring"
+
+midjourney:
+  name: "Midjourney"
+  url: "https://www.midjourney.com/"
+  description: "AI image generation tool producing high-quality art, illustrations, and design assets."
+  category: "AI Image"
+  rating: 4.8
+  price: "$10/mo"
+  commission: "N/A"
+
+canva:
+  name: "Canva"
+  url: "https://www.canva.com/?via=futurstack"
+  description: "Design platform with AI-powered tools. Templates, image editing, video, and presentations."
+  category: "Design"
+  rating: 4.6
+  price: "$13/mo"
+  commission: "Up to $36/sale"
+
+grammarly:
+  name: "Grammarly"
+  url: "https://www.grammarly.com/?via=futurstack"
+  description: "AI writing assistant for grammar, clarity, tone, and style. Works everywhere you write."
+  category: "AI Writing"
+  rating: 4.5
+  price: "$12/mo"
+  commission: "20% recurring"
+
+zapier:
+  name: "Zapier"
+  url: "https://zapier.com/?via=futurstack"
+  description: "Automation platform connecting 6,000+ apps. No-code workflow builder with AI features."
+  category: "Automation"
+  rating: 4.5
+  price: "$20/mo"
+  commission: "25% recurring"
+
+semrush:
+  name: "Semrush"
+  url: "https://www.semrush.com/?via=futurstack"
+  description: "All-in-one digital marketing toolkit. SEO, content marketing, competitor analysis, PPC."
+  category: "SEO"
+  rating: 4.7
+  price: "$130/mo"
+  commission: "$200/sale"
+
+cursor:
+  name: "Cursor"
+  url: "https://cursor.sh/?via=futurstack"
+  description: "AI-first code editor built on VS Code. Intelligent code completion, chat, and editing."
+  category: "Developer Tools"
+  rating: 4.6
+  price: "$20/mo"
+  commission: "20% recurring"

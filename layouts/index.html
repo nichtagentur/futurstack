@@ -1,0 +1,58 @@
+{{ define "main" }}
+<section class="hero">
+  <h1>{{ .Site.Params.tagline }}</h1>
+  <p>Expert reviews, comparisons, and guides for the best AI and SaaS tools. Cut through the hype -- find what actually works.</p>
+</section>
+
+<section class="home-section">
+  <h2>Latest Reviews</h2>
+  <div class="article-grid">
+    {{ range first 6 (where .Site.RegularPages "Section" "reviews") }}
+    <article class="article-card">
+      {{ with .Params.featured_image }}
+      <img class="card-image" src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      {{ end }}
+      <div class="card-body">
+        <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p class="card-excerpt">{{ .Params.description | default (.Summary | truncate 120) }}</p>
+        <div class="card-meta">
+          <time>{{ .Date.Format "Jan 2, 2006" }}</time>
+          {{ with .Params.rating }}<span class="card-rating">{{ . }}/5</span>{{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+  <a href="/reviews/" class="section-link">All Reviews &rarr;</a>
+</section>
+
+<section class="home-section">
+  <h2>Comparisons</h2>
+  <div class="article-grid">
+    {{ range first 3 (where .Site.RegularPages "Section" "comparisons") }}
+    <article class="article-card">
+      <div class="card-body">
+        <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p class="card-excerpt">{{ .Params.description | default (.Summary | truncate 120) }}</p>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+  <a href="/comparisons/" class="section-link">All Comparisons &rarr;</a>
+</section>
+
+<section class="home-section">
+  <h2>Guides</h2>
+  <div class="article-grid">
+    {{ range first 3 (where .Site.RegularPages "Section" "guides") }}
+    <article class="article-card">
+      <div class="card-body">
+        <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p class="card-excerpt">{{ .Params.description | default (.Summary | truncate 120) }}</p>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+  <a href="/guides/" class="section-link">All Guides &rarr;</a>
+</section>
+{{ end }}

@@ -1,0 +1,32 @@
+{{ define "main" }}
+<section class="section-listing">
+  <header class="section-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+    <p>{{ . }}</p>
+    {{ end }}
+  </header>
+  <div class="article-grid">
+    {{ range .Pages }}
+    <article class="article-card">
+      {{ with .Params.featured_image }}
+      <img class="card-image" src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      {{ end }}
+      <div class="card-body">
+        {{ with .Params.categories }}
+        <span class="card-category">{{ index . 0 }}</span>
+        {{ end }}
+        <h2 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="card-excerpt">{{ .Params.description | default (.Summary | truncate 150) }}</p>
+        <div class="card-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          {{ with .Params.rating }}
+          <span class="card-rating">{{ . }}/5</span>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

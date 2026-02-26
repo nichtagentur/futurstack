@@ -1,0 +1,5 @@
+{{ if or .Params.has_affiliates (in .Content "affiliate") }}
+<div class="affiliate-disclosure">
+  <p>{{ .Site.Params.affiliateDisclosure }} <a href="/pages/affiliate/">Learn more</a>.</p>
+</div>
+{{ end }}

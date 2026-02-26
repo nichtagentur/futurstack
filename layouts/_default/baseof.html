@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="/" class="site-logo">FuturStack</a>
+      <ul class="nav-links">
+        <li><a href="/reviews/">Reviews</a></li>
+        <li><a href="/comparisons/">Comparisons</a></li>
+        <li><a href="/roundups/">Roundups</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/pages/about/">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="/pages/privacy/">Privacy Policy</a>
+        <a href="/pages/impressum/">Impressum</a>
+        <a href="/pages/affiliate/">Affiliate Disclosure</a>
+      </div>
+      <p class="footer-note">Content is AI-assisted and expert-reviewed by the FuturStack editorial team.</p>
+      <p class="footer-copy">&copy; {{ now.Year }} FuturStack. All rights reserved.</p>
+    </div>
+  </footer>
+  {{ partial "cookie-consent.html" . }}
+</body>
+</html>

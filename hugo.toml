@@ -1,0 +1,45 @@
+baseURL = "https://futurstack.vercel.app"
+languageCode = "en-us"
+title = "FuturStack - AI & SaaS Tool Reviews"
+description = "Expert reviews, comparisons, and guides for the best AI and SaaS tools. Make smarter software decisions."
+copyright = "FuturStack"
+enableRobotsTXT = true
+enableEmoji = false
+
+[params]
+  tagline = "Smart Tools for a Smarter Future"
+  author = "FuturStack Editorial Team"
+  description = "Expert reviews, comparisons, and guides for the best AI and SaaS tools."
+  affiliateDisclosure = "This article contains affiliate links. We may earn a commission at no extra cost to you."
+  locale = "en_US"
+  ogImage = "/images/futurstack-og.png"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[permalinks]
+  reviews = "/reviews/:slug/"
+  comparisons = "/comparisons/:slug/"
+  roundups = "/roundups/:slug/"
+  guides = "/guides/:slug/"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableSVG = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
