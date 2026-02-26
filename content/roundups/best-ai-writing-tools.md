@@ -40,7 +40,7 @@ Our evaluation process focuses on real-world performance rather than marketing p
 ## The Best AI Writing Tools
 
 ### Jasper AI
-{{< rating 4.5 >}}
+{{< rating "4.5" >}}
 
 Jasper AI has earned its position as the premium choice for marketing teams and content operations that demand both quality and scalability. What sets Jasper apart isn't just its sophisticated language model—it's the comprehensive content marketing ecosystem built around it.
 
@@ -57,7 +57,7 @@ Jasper's template library covers virtually every marketing scenario, from Facebo
 {{< affiliate "jasper" >}}
 
 ### Copy.ai
-{{< rating 4.3 >}}
+{{< rating "4.3" >}}
 
 Copy.ai strikes the perfect balance between powerful features and accessibility, making it the go-to choice for sales teams and solo marketers who need quality copy without complexity. The platform's strength lies in its intuitive approach to generating persuasive, conversion-focused content quickly.
 
@@ -74,7 +74,7 @@ What makes Copy.ai particularly valuable is its generous free tier and transpare
 {{< affiliate "copy-ai" >}}
 
 ### Writesonic
-{{< rating 4.2 >}}
+{{< rating "4.2" >}}
 
 Writesonic has positioned itself as the budget-conscious creator's dream without sacrificing essential functionality. What started as a simple content generator has evolved into a comprehensive writing platform that punches well above its price point.
 
@@ -91,7 +91,7 @@ Recent additions like the AI article writer 4.0 and Photosonic for image generat
 {{< affiliate "writesonic" >}}
 
 ### Grammarly
-{{< rating 4.5 >}}
+{{< rating "4.5" >}}
 
 Grammarly represents the mature evolution of AI writing assistance—less flashy than content generators, but arguably more transformative for professional writing quality. While others focus on creation, Grammarly excels at refinement, making it indispensable for anyone who writes professionally.
 

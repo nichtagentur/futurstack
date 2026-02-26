@@ -142,11 +142,11 @@ Different AI SEO tools excel in different areas. Some are better for keyword res
 
 ## Recommended Tools
 
-For keyword research and competitive analysis, {{< affiliate "semrush" >}} offers comprehensive AI-powered insights with a rating of {{< rating 4.7 >}}. Their AI analyzes millions of keywords and competitor strategies to identify the most valuable optimization opportunities for your specific niche.
+For keyword research and competitive analysis, {{< affiliate "semrush" >}} offers comprehensive AI-powered insights with a rating of {{< rating "4.7" >}}. Their AI analyzes millions of keywords and competitor strategies to identify the most valuable optimization opportunities for your specific niche.
 
-Content creation and optimization benefit greatly from {{< affiliate "jasper" >}}, which maintains a {{< rating 4.5 >}} rating for its ability to generate SEO-optimized content that balances keyword targeting with readability and user value.
+Content creation and optimization benefit greatly from {{< affiliate "jasper" >}}, which maintains a {{< rating "4.5" >}} rating for its ability to generate SEO-optimized content that balances keyword targeting with readability and user value.
 
-For comprehensive SEO content optimization, {{< affiliate "surfer-seo" >}} provides AI-driven content analysis and optimization suggestions with a {{< rating 4.6 >}} rating, helping ensure your content matches the characteristics of top-ranking pages in your target keywords.
+For comprehensive SEO content optimization, {{< affiliate "surfer-seo" >}} provides AI-driven content analysis and optimization suggestions with a {{< rating "4.6" >}} rating, helping ensure your content matches the characteristics of top-ranking pages in your target keywords.
 
 ## FAQ
 

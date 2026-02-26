@@ -3,5 +3,9 @@
   "outputDirectory": "public",
   "framework": "hugo",
   "installCommand": "",
-  "rewrites": []
+  "build": {
+    "env": {
+      "HUGO_VERSION": "0.123.7"
+    }
+  }
 }

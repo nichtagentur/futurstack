@@ -140,15 +140,15 @@ Based on extensive testing and user feedback, here are three standout AI writing
 
 {{< affiliate "jasper" >}}
 
-Jasper stands out for businesses requiring high-quality, brand-consistent content at scale. With its robust template library and advanced brand voice training capabilities, Jasper {{< rating 4.6 >}} excels at maintaining consistency across large content teams. The platform's integration ecosystem and collaboration features make it ideal for marketing teams managing complex content workflows.
+Jasper stands out for businesses requiring high-quality, brand-consistent content at scale. With its robust template library and advanced brand voice training capabilities, Jasper {{< rating "4.6" >}} excels at maintaining consistency across large content teams. The platform's integration ecosystem and collaboration features make it ideal for marketing teams managing complex content workflows.
 
 {{< affiliate "copy-ai" >}}
 
-Copy.ai offers exceptional value for small to medium businesses focusing on marketing copy and social media content. Its intuitive interface and extensive template collection make it accessible for teams with varying technical skills. With a {{< rating 4.3 >}} rating from users, Copy.ai provides solid performance at competitive pricing, making it an excellent choice for budget-conscious businesses seeking quality AI writing assistance.
+Copy.ai offers exceptional value for small to medium businesses focusing on marketing copy and social media content. Its intuitive interface and extensive template collection make it accessible for teams with varying technical skills. With a {{< rating "4.3" >}} rating from users, Copy.ai provides solid performance at competitive pricing, making it an excellent choice for budget-conscious businesses seeking quality AI writing assistance.
 
 {{< affiliate "writesonic" >}}
 
-Writesonic delivers comprehensive content creation capabilities with strong SEO optimization features. The platform's {{< rating 4.4 >}} performance stems from its ability to handle diverse content types while maintaining quality output. Writesonic's competitive pricing and robust feature set make it particularly suitable for content agencies and businesses with diverse writing needs.
+Writesonic delivers comprehensive content creation capabilities with strong SEO optimization features. The platform's {{< rating "4.4" >}} performance stems from its ability to handle diverse content types while maintaining quality output. Writesonic's competitive pricing and robust feature set make it particularly suitable for content agencies and businesses with diverse writing needs.
 
 ## FAQ
 

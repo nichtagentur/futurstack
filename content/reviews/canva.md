@@ -123,7 +123,7 @@ However, it's important to understand Canva's limitations. This isn't profession
 
 For our Canva review 2026, we found the platform continues to evolve rapidly, with regular feature additions and improvements. The company's investment in AI technology positions it well for future design automation needs.
 
-{{< rating 4.6 >}}
+{{< rating "4.6" >}}
 
 ## FAQ
 

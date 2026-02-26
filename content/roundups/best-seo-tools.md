@@ -39,7 +39,7 @@ Our evaluation process combines hands-on testing with real-world performance dat
 
 ### Semrush
 
-{{< rating 4.7 >}}
+{{< rating "4.7" >}}
 
 Semrush stands as the most comprehensive SEO platform available in 2026, offering an unmatched combination of competitive intelligence and actionable insights. The platform's keyword database contains over 25 billion keywords across 142 geographic databases, making it invaluable for both local and international SEO campaigns. What sets Semrush apart is its ability to reverse-engineer competitor strategies with surgical precision – you can see exactly which keywords drive your competitors' traffic, their most successful content pieces, and their backlink acquisition patterns.
 
@@ -61,7 +61,7 @@ For agencies and SEO professionals managing multiple client accounts, Semrush's 
 
 ### Surfer SEO
 
-{{< rating 4.6 >}}
+{{< rating "4.6" >}}
 
 Surfer SEO has revolutionized content optimization by making data-driven SEO accessible to content creators who aren't technical SEO experts. The platform's core strength lies in its ability to analyze the top-ranking pages for any keyword and extract actionable optimization guidelines that writers can immediately implement. The Content Editor provides real-time scoring as you write, suggesting optimal keyword usage, content structure, and semantic variations that improve topical relevance.
 

@@ -113,7 +113,7 @@ However, Cursor isn't perfect. The internet dependency and limited free tier cre
 
 For developers ready to embrace AI-native development tools and willing to adapt their workflow, Cursor offers compelling value. It's not just an incremental improvement over existing tools—it's a fundamental reimagining of how AI can assist in software development. In our comprehensive Cursor review 2026, we found it consistently delivers on its promises while maintaining the stability and familiarity developers expect.
 
-{{< rating 4.6 >}}
+{{< rating "4.6" >}}
 
 ## FAQ
 

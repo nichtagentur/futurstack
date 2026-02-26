@@ -113,7 +113,7 @@ Small businesses without dedicated content resources may struggle to implement S
 
 Surfer SEO earns high marks as a sophisticated content optimization platform that delivers measurable results when used correctly. Our testing consistently showed ranking improvements for content optimized using Surfer's recommendations, often within 4-8 weeks of publication or optimization.
 
-{{< rating 4.6 >}}
+{{< rating "4.6" >}}
 
 The platform's strength lies in its data-driven approach and comprehensive competitive analysis. Rather than relying on generic SEO advice, Surfer provides specific, actionable recommendations based on what's actually working in your target search results. This approach removes much of the guesswork from content optimization.
 
