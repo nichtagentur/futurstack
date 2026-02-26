@@ -876,7 +876,130 @@
   <span class="slide-num">13 / 15</span>
 </section>
 
-<!-- ========== SLIDE 14: WHAT'S LIVE NOW ========== -->
+<!-- ========== SLIDE 14: QA PIPELINE ========== -->
+<section class="slide" id="slide-14">
+  <div class="slide-inner fade-in">
+    <h2><span class="accent">Quality Assurance</span> Pipeline</h2>
+    <p class="lead">Every article passes 25+ automated checks before publishing. Nothing goes live that fails QA.</p>
+
+    <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      <div class="card card-highlight">
+        <span class="card-icon">&#128221;</span>
+        <h3>Content Checks</h3>
+        <p>Word count (1200-3500), heading structure (3+ H2s), FAQ section present, no placeholder text</p>
+      </div>
+      <div class="card card-green">
+        <span class="card-icon">&#9878;</span>
+        <h3>Legal Checks</h3>
+        <p>Affiliate disclosure present, links marked "Werbelink", no bare affiliate URLs, no misleading superlatives (UWG)</p>
+      </div>
+      <div class="card card-purple">
+        <span class="card-icon">&#128270;</span>
+        <h3>SEO Checks</h3>
+        <p>Title length (max 70), meta description (80-160 chars), schema type valid, year in title, strong intro</p>
+      </div>
+      <div class="card card-orange">
+        <span class="card-icon">&#128736;</span>
+        <h3>Technical Checks</h3>
+        <p>Shortcode integrity (matched open/close), front matter complete, Hugo build succeeds, valid date format</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem; padding: 1rem; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px;">
+      <h3 style="margin-bottom: 0.5rem;">Auto-Fix Capability</h3>
+      <p style="margin: 0; font-size: 0.95rem; color: var(--gray);">If an article fails QA (e.g., missing affiliate shortcode), the pipeline attempts an automatic fix and re-checks. Only if the fix also fails does it halt and require manual review.</p>
+    </div>
+  </div>
+  <span class="slide-num">14 / 18</span>
+</section>
+
+<!-- ========== SLIDE 15: PUBLISHING SCHEDULE ========== -->
+<section class="slide" id="slide-15">
+  <div class="slide-inner fade-in">
+    <h2>Publishing <span class="accent">Schedule</span></h2>
+    <p class="lead">2-3 articles per week, automatically scheduled. Content type rotates for variety.</p>
+
+    <div class="split">
+      <div>
+        <h3>Weekly Rhythm</h3>
+        <table class="clean-table">
+          <thead><tr><th>Day</th><th>Content Type</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Tuesday</strong></td><td>Review</td><td>Primary revenue driver</td></tr>
+            <tr><td><strong>Thursday</strong></td><td>Comparison / Roundup</td><td>High search volume</td></tr>
+            <tr><td><strong>Saturday</strong></td><td>Guide / Review</td><td>Topical authority</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 1.5rem;">Smart Content Calendar</h3>
+        <p style="font-size: 0.9rem; color: var(--gray);">The pipeline automatically picks the next article based on:</p>
+        <ul style="font-size: 0.9rem; color: var(--gray); padding-left: 1.2rem;">
+          <li><strong>Commission priority</strong> -- highest-earning affiliate programs first</li>
+          <li><strong>Content gaps</strong> -- what's missing from the site</li>
+          <li><strong>Type rotation</strong> -- review, comparison, guide, review, roundup, review...</li>
+          <li><strong>Search volume</strong> -- comparison pairs people actually search for</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Next 6 Articles (Planned)</h3>
+        <div class="card" style="font-family: monospace; font-size: 0.82rem; line-height: 1.8; background: var(--dark); color: #e2e8f0;">
+          <div><span style="color: #60a5fa;">Week 1 Tue:</span> <span style="color: #fcd34d;">[REVIEW]</span> Zapier</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  25% recurring commission</div>
+          <div><span style="color: #60a5fa;">Week 1 Thu:</span> <span style="color: #c4b5fd;">[COMPARE]</span> Jasper vs Writesonic</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  High search volume pair</div>
+          <div><span style="color: #60a5fa;">Week 1 Sat:</span> <span style="color: #86efac;">[GUIDE]</span> Marketing Automation with AI</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  High search volume topic</div>
+          <div><span style="color: #60a5fa;">Week 2 Tue:</span> <span style="color: #fcd34d;">[REVIEW]</span> Writesonic</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  30% recurring commission</div>
+          <div><span style="color: #60a5fa;">Week 2 Thu:</span> <span style="color: #f87171;">[ROUNDUP]</span> Best Productivity Tools</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  Category gap fill</div>
+          <div><span style="color: #60a5fa;">Week 2 Sat:</span> <span style="color: #fcd34d;">[REVIEW]</span> Grammarly</div>
+          <div style="color: #94a3b8; font-size: 0.75rem;">  20% recurring commission</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">15 / 18</span>
+</section>
+
+<!-- ========== SLIDE 16: GERMAN LAW ========== -->
+<section class="slide" id="slide-16">
+  <div class="slide-inner fade-in">
+    <h2>German <span class="accent">Legal Compliance</span></h2>
+    <p class="lead">Running an affiliate site from Germany means complying with TMG, UWG, DSGVO, and MStV. Here's what's covered:</p>
+
+    <div class="card-grid">
+      <div class="card card-orange">
+        <h3>Impressum (ss 5 TMG)</h3>
+        <p>Full legal notice with name, address, contact. Placeholder ready -- must be filled before real affiliate sign-ups.</p>
+      </div>
+      <div class="card card-orange">
+        <h3>Werbekennzeichnung (UWG)</h3>
+        <p>Every affiliate link labeled "Werbelink / affiliate link". Disclosure banner at top of every article (German + English).</p>
+      </div>
+      <div class="card card-orange">
+        <h3>Datenschutz (DSGVO)</h3>
+        <p>Privacy policy with Art. 6 legal basis, cookie consent banner (no tracking before consent), data retention policy.</p>
+      </div>
+      <div class="card card-orange">
+        <h3>KI-Transparenz</h3>
+        <p>Bilingual footer disclosure: "Inhalte sind KI-gestuetzt erstellt und redaktionell geprueft." Impressum section on AI content.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem; padding: 1rem; background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px;">
+      <h3 style="margin-bottom: 0.5rem;">Before Going Live with Real Affiliate Links</h3>
+      <ul style="font-size: 0.9rem; color: var(--gray); padding-left: 1.2rem; margin: 0;">
+        <li>Fill in Impressum with real name + address (no way around this under German law)</li>
+        <li>Replace placeholder affiliate URLs with real program tracking links</li>
+        <li>Consider consulting a lawyer for final review (especially if revenue exceeds hobby threshold)</li>
+      </ul>
+    </div>
+  </div>
+  <span class="slide-num">16 / 18</span>
+</section>
+
+<!-- ========== SLIDE 17: STATUS ========== -->
 <section class="slide" id="slide-14">
   <div class="slide-inner fade-in">
     <h2>What's <span class="accent">Live Right Now</span></h2>
@@ -918,26 +1041,27 @@
       </tbody>
     </table>
   </div>
-  <span class="slide-num">14 / 15</span>
+  <span class="slide-num">17 / 18</span>
 </section>
 
-<!-- ========== SLIDE 15: SUMMARY ========== -->
-<section class="slide slide-title" id="slide-15">
+<!-- ========== SLIDE 18: SUMMARY ========== -->
+<section class="slide slide-title" id="slide-18">
   <div class="slide-inner">
     <h1 style="font-size: 2.2rem;">The Machine in One Sentence</h1>
     <p class="subtitle" style="max-width: 700px; margin: 0 auto 2rem;">
-      AI writes expert-level tool reviews using real data, AI generates the images, Hugo builds the site, GitHub Actions orchestrates everything weekly, Vercel serves it globally, and affiliate links turn reader clicks into recurring revenue.
+      AI writes expert-level tool reviews using real data, AI generates the images, automated QA validates every article against 25+ checks (including German law), Hugo builds the site, GitHub Actions publishes 2-3 articles per week, Vercel serves it globally, and affiliate links turn reader clicks into recurring revenue.
     </p>
 
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
       <div class="badge badge-blue" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Zero manual writing</div>
       <div class="badge badge-green" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Zero manual publishing</div>
-      <div class="badge badge-purple" style="font-size: 0.9rem; padding: 0.4rem 1rem;">Passive recurring income</div>
+      <div class="badge badge-purple" style="font-size: 0.9rem; padding: 0.4rem 1rem;">25+ QA checks per article</div>
+      <div class="badge badge-blue" style="font-size: 0.9rem; padding: 0.4rem 1rem;">German law compliant</div>
     </div>
 
     <p class="meta" style="font-size: 1rem; opacity: 0.7;">futurstack.vercel.app</p>
   </div>
-  <span class="slide-num">15 / 15</span>
+  <span class="slide-num">18 / 18</span>
 </section>
 
 <!-- === SCRIPTS === -->
@@ -945,7 +1069,7 @@
   // Generate nav dots
   const slides = document.querySelectorAll('.slide');
   const navDots = document.getElementById('navDots');
-  const labels = ['Title','Big Picture','Content','Types','Writing','Prompt','Images','Automation','Cycle','Architecture','Money','Revenue','SEO+Legal','Status','Summary'];
+  const labels = ['Title','Big Picture','Content','Types','Writing','Prompt','Images','Automation','Cycle','Architecture','Money','Revenue','SEO+Legal','QA','Schedule','German Law','Status','Summary'];
 
   slides.forEach((slide, i) => {
     const dot = document.createElement('button');
